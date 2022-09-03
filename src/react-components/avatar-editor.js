@@ -15,6 +15,8 @@ import { ensureAvatarMaterial } from "../utils/avatar-utils";
 import AvatarPreview from "./avatar-preview";
 import styles from "../assets/stylesheets/avatar-editor.scss";
 
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+
 const delistAvatarInfoMessage = defineMessage({
   id: "avatar-editor.delist-avatar-info",
   defaultMessage:
@@ -147,7 +149,7 @@ class AvatarEditor extends Component {
     e.preventDefault();
 
     if (this.inputFiles.glb && this.inputFiles.glb instanceof File) {
-      const gltfLoader = new THREE.GLTFLoader().register(parser => new GLTFBinarySplitterPlugin(parser));
+      const gltfLoader = new GLTFLoader().register(parser => new GLTFBinarySplitterPlugin(parser));
       const gltfUrl = URL.createObjectURL(this.inputFiles.glb);
       const onProgress = console.log;
 
@@ -602,7 +604,7 @@ class AvatarEditor extends Component {
                 {this.checkbox(
                   "allow_remixing",
                   intl.formatMessage({
-                    id: "avatar-editor.field.alllow-remixing",
+                    id: "avatar-editor.field.allow-remixing",
                     defaultMessage: "Allow others to edit and re-publish your avatar as long as they give you credit."
                   }),
                   <span>
